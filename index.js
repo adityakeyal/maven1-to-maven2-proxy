@@ -1,6 +1,7 @@
 const http = require('http');
 const request = require('request');
 const port = 8080;
+const MAVEN2_BASE_HTTP = "http://central.maven.org/maven2/";
 
 const requestHandler = (req, response) => {
     console.log(req.url);
@@ -18,8 +19,8 @@ const requestHandler = (req, response) => {
 
         console.log(` Group Id : ${groupId} : ${artifactId} : ${jarVersion} `);
         console.log(`Fetching jar with group Id ${groupId} and jarName ${jarName}`);
-        var httpLocation = `http://central.maven.org/maven2/${groupId}/${artifactId}/${jarVersion}/${jarName}`;
-        console.log(httpLocation);
+        var httpLocation = `${MAVEN2_BASE_HTTP}${groupId}/${artifactId}/${jarVersion}/${jarName}`;
+        console.log(`Location to fetch from : ${httpLocation} `);
 
         request.get(httpLocation).pipe(response);
 
